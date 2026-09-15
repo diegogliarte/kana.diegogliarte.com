@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-paper: #f3f0e8;
+	--color-kana: #c63d25;
+	--color-kana-dark: #962d1c;
+	--color-kana-soft: #f5ddd4;
+	--color-kana-pale: #fff6f1;
+}
+
+@utility brand {
+	@apply flex cursor-pointer items-center gap-2 text-[15px] font-bold tracking-tight transition-colors hover:text-kana;
+}
+
+@utility quiet-button {
+	@apply cursor-pointer text-[13px] text-stone-500 transition-colors hover:text-kana;
+}
+
+@utility section-heading {
+	@apply flex items-end justify-between border-l-4 border-kana pl-3;
+}
+
+@utility kicker {
+	@apply text-xs font-bold tracking-[.14em] text-stone-500 uppercase;
+}
+
+@utility select-row {
+	@apply flex cursor-pointer items-center gap-2 px-2 py-2 transition-colors hover:bg-kana-soft has-checked:bg-kana-pale;
+}
+
+@utility select-card {
+	@apply flex cursor-pointer items-center gap-3 border border-stone-300 bg-white/35 p-3 transition-colors hover:border-kana hover:bg-kana-soft has-checked:border-kana has-checked:bg-kana-pale;
+}
+
+@utility check-control {
+	@apply cursor-pointer accent-kana;
+}
+
+@utility primary-action {
+	@apply w-full cursor-pointer bg-kana px-4 py-2.5 text-base font-bold text-white transition-colors hover:bg-kana-dark;
+}
+
+@utility answer-input {
+	@apply min-w-0 flex-1 border border-r-0 border-stone-400 bg-white px-4 py-3 text-center outline-none focus:border-kana;
+}
+
+@utility submit-action {
+	@apply cursor-pointer bg-stone-900 px-5 text-sm font-bold text-white transition-colors hover:bg-kana;
+}
+
+@utility feedback {
+	@apply h-5 text-sm font-bold text-kana;
+}
+
+@utility kana-choice {
+	@apply relative h-20 cursor-pointer border text-3xl transition-colors disabled:cursor-default sm:h-24 sm:text-4xl;
+}
