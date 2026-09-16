@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import type { KanaSelection } from './kana';
 
-export type PracticeMode = 'write' | 'choose';
+export type PracticeMode = 'write' | 'choose' | 'draw';
 
 export type SessionResult = {
 	id: string;
@@ -46,7 +46,7 @@ function isSettings(value: unknown): value is Settings {
 	if (!value || typeof value !== 'object') return false;
 	const settings = value as Partial<Settings>;
 	return (
-		(settings.mode === 'write' || settings.mode === 'choose') &&
+		(settings.mode === 'write' || settings.mode === 'choose' || settings.mode === 'draw') &&
 		Array.isArray(settings.selections) &&
 		settings.selections.length > 0 &&
 		settings.selections.every((selection) => selections.has(selection))

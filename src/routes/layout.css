@@ -55,3 +55,12 @@
 @utility kana-choice {
 	@apply relative h-20 cursor-pointer border text-3xl transition-colors disabled:cursor-default sm:h-24 sm:text-4xl;
 }
+
+.app-shell {
+	height: var(--app-height, 100dvh);
+}
+
+.draw-board {
+	width: min(82vw, 48dvh, 22rem);
+	aspect-ratio: 1;
+}
