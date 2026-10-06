@@ -52,6 +52,10 @@
 	@apply h-5 text-sm font-bold text-kana;
 }
 
+@utility skip-action {
+	@apply cursor-pointer text-[11px] text-stone-400/60 transition-colors hover:text-stone-500;
+}
+
 @utility kana-choice {
 	@apply relative h-20 cursor-pointer border text-3xl transition-colors disabled:cursor-default sm:h-24 sm:text-4xl;
 }

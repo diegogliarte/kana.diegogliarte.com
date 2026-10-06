@@ -16,6 +16,7 @@
 	let choices = $state<Kana[]>([]);
 	let answer = $state('');
 	let wrong = $state(false);
+	let failedAttempts = $state(0);
 	let wrongChoices = $state<string[]>([]);
 	let questionMissed = $state(false);
 	let lastGuess = $state('');
@@ -69,6 +70,7 @@
 		choices = createChoices(next, pool);
 		answer = '';
 		wrong = false;
+		failedAttempts = 0;
 		wrongChoices = [];
 		questionMissed = false;
 		strokes = [];
@@ -94,7 +96,15 @@
 	function tryAgain() {
 		attempts += 1;
 		wrong = true;
+		failedAttempts += 1;
 		questionMissed = true;
+	}
+
+	function skipQuestion() {
+		if (!current || failedAttempts < 2) return;
+		repeatLater(current);
+		lastGuess = `${current.character} · ${current.romaji}`;
+		nextQuestion();
 	}
 
 	async function submitWritten(event: SubmitEvent) {
@@ -282,7 +292,10 @@
 								/>
 								<button class="submit-action" type="submit">Enter</button>
 							</div>
-							<p class="mt-2 feedback" aria-live="polite">{wrong ? 'No — try again' : ''}</p>
+							<p class="mt-2 feedback" aria-live="polite">{wrong ? 'No. Try again' : ''}</p>
+							{#if failedAttempts >= 2}
+								<button class="skip-action" type="button" onclick={skipQuestion}>Skip</button>
+							{/if}
 						</form>
 					</div>
 				{:else if mode === 'choose'}
@@ -305,7 +318,10 @@
 								</button>
 							{/each}
 						</div>
-						<p class="mt-3 feedback" aria-live="polite">{wrong ? 'No — try again' : ''}</p>
+						<p class="mt-3 feedback" aria-live="polite">{wrong ? 'No. Try again' : ''}</p>
+						{#if failedAttempts >= 2}
+							<button class="skip-action" type="button" onclick={skipQuestion}>Skip</button>
+						{/if}
 					</div>
 				{:else}
 					<div class="flex min-h-0 flex-1 flex-col items-center justify-center text-center">
